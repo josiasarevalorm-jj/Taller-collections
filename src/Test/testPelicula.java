@@ -3,8 +3,10 @@ package Test;
 import Clases.Pelicula;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class testPelicula {
@@ -16,6 +18,9 @@ public class testPelicula {
 
         Set<Pelicula> setPeliculas =
                 new HashSet<Pelicula>();
+
+        Map<String, List<Pelicula>> mapaPeliculas =
+                new HashMap<String, List<Pelicula>>();
 
         // AGREGAR PELICULAS
 
@@ -63,7 +68,7 @@ public class testPelicula {
             System.out.println(pelicula);
         }
 
-        //hashset
+        // HASHSET
 
         setPeliculas.addAll(listaPeliculas);
 
@@ -85,6 +90,55 @@ public class testPelicula {
         for(Pelicula pelicula : setPeliculas){
 
             System.out.println(pelicula);
+        }
+
+        // MAP
+
+        List<Pelicula> accion =
+                new ArrayList<Pelicula>();
+
+        List<Pelicula> romance =
+                new ArrayList<Pelicula>();
+
+        List<Pelicula> cienciaFiccion =
+                new ArrayList<Pelicula>();
+
+        accion.add(listaPeliculas.get(0));
+
+        romance.add(listaPeliculas.get(1));
+
+        cienciaFiccion.add(listaPeliculas.get(2));
+
+        mapaPeliculas.put(
+                "Accion",
+                accion
+        );
+
+        mapaPeliculas.put(
+                "Romance",
+                romance
+        );
+
+        mapaPeliculas.put(
+                "Ciencia Ficcion",
+                cienciaFiccion
+        );
+
+        System.out.println(
+                "\nMAPA DE PELICULAS"
+        );
+
+        for(String genero : mapaPeliculas.keySet()){
+
+            System.out.println(
+                    "\nGenero: " + genero
+            );
+
+            for(Pelicula pelicula :
+                    mapaPeliculas.get(genero)){
+
+                System.out.println(pelicula);
+            }
         }
     }
 }
