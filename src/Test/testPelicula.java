@@ -3,15 +3,21 @@ package Test;
 import Clases.Pelicula;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class testPelicula {
 
     public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
 
         List<Pelicula> listaPeliculas =
                 new ArrayList<Pelicula>();
@@ -21,6 +27,9 @@ public class testPelicula {
 
         Map<String, List<Pelicula>> mapaPeliculas =
                 new HashMap<String, List<Pelicula>>();
+
+        TreeSet<String> peliculasOrdenadas =
+                new TreeSet<String>();
 
         // AGREGAR PELICULAS
 
@@ -139,6 +148,136 @@ public class testPelicula {
 
                 System.out.println(pelicula);
             }
+        }
+
+        // BUSCAR PELICULA
+
+        System.out.println(
+                "\nIngrese pelicula a buscar:"
+        );
+
+        String buscar = sc.nextLine();
+
+        boolean encontrada = false;
+
+        for(Pelicula pelicula : listaPeliculas){
+
+            if(pelicula.getNombre()
+                    .equalsIgnoreCase(buscar)){
+
+                encontrada = true;
+
+                System.out.println(
+                        "\nPelicula encontrada:"
+                );
+
+                System.out.println(pelicula);
+            }
+        }
+
+        if(!encontrada){
+
+            System.out.println(
+                    "\nPelicula no encontrada"
+            );
+        }
+
+        // AGREGAR NUEVA PELICULA
+
+        System.out.println(
+                "\nIngrese nombre:"
+        );
+
+        String nombre = sc.nextLine();
+
+        System.out.println(
+                "Ingrese director:"
+        );
+
+        String director = sc.nextLine();
+
+        System.out.println(
+                "Ingrese duracion:"
+        );
+
+        int duracion = sc.nextInt();
+
+        sc.nextLine();
+
+        System.out.println(
+                "Ingrese genero:"
+        );
+
+        String genero = sc.nextLine();
+
+        System.out.println(
+                "Ingrese año estreno:"
+        );
+
+        int anio = sc.nextInt();
+
+        System.out.println(
+                "Ingrese rating:"
+        );
+
+        double rating = sc.nextDouble();
+
+        Pelicula nueva =
+                new Pelicula(
+                        nombre,
+                        director,
+                        duracion,
+                        genero,
+                        anio,
+                        rating
+                );
+
+        listaPeliculas.add(nueva);
+
+        System.out.println(
+                "\nLISTA ACTUALIZADA"
+        );
+
+        for(Pelicula pelicula : listaPeliculas){
+
+            System.out.println(pelicula);
+        }
+
+        // ORDENAR POR DURACION
+
+        Collections.sort(
+                listaPeliculas,
+                Comparator.comparingInt(
+                        Pelicula::getDuracion
+                )
+        );
+
+        System.out.println(
+                "\nPELICULAS ORDENADAS POR DURACION"
+        );
+
+        for(Pelicula pelicula : listaPeliculas){
+
+            System.out.println(pelicula);
+        }
+
+        // TREESET
+
+        for(Pelicula pelicula : listaPeliculas){
+
+            peliculasOrdenadas.add(
+                    pelicula.getNombre()
+            );
+        }
+
+        System.out.println(
+                "\nPELICULAS ORDENADAS POR NOMBRE"
+        );
+
+        for(String pelicula :
+                peliculasOrdenadas){
+
+            System.out.println(pelicula);
         }
     }
 }
